@@ -1,7 +1,6 @@
 package config
 
 import (
-	"io/ioutil"
 	"os"
 
 	"gopkg.in/yaml.v2"
@@ -21,7 +20,7 @@ type Config struct {
 
 func LoadConfig() (*Config, error) {
 	configFile := os.Getenv("HOME") + "/.git-contexts.yaml"
-	fileContent, err := ioutil.ReadFile(configFile)
+	fileContent, err := os.ReadFile(configFile)
 	if err != nil {
 		return nil, err
 	}
