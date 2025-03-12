@@ -16,6 +16,10 @@ var rootCmd = &cobra.Command{
 		// Load the configuration
 		cfg, err := config.LoadConfig()
 		if err != nil {
+			if os.IsNotExist(err) {
+				fmt.Println("No configuration file found. Run 'git-context-switcher init' to create one.")
+				os.Exit(1)
+			}
 			fmt.Printf("Error loading config: %v\n", err)
 			os.Exit(1)
 		}

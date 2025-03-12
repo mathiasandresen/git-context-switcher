@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 
 	"gopkg.in/yaml.v2"
@@ -22,7 +23,10 @@ func LoadConfig() (*Config, error) {
 	configFile := os.Getenv("HOME") + "/.git-contexts.yaml"
 	fileContent, err := os.ReadFile(configFile)
 	if err != nil {
-		return nil, err
+		if os.IsNotExist(err) {
+			return nil, err // Preserve IsNotExist error for better handling upstream
+		}
+		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
 
 	var config Config
