@@ -2,8 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"gitc/config"
-	"gitc/context"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -13,47 +11,31 @@ var rootCmd = &cobra.Command{
 	Use:   "gitc",
 	Short: "A tool to switch between Git contexts",
 	Run: func(cmd *cobra.Command, args []string) {
-		// Load the configuration
-		cfg, err := config.LoadConfig()
-		if err != nil {
-			if os.IsNotExist(err) {
-				fmt.Println("No configuration file found. Run 'gitc init' to create one.")
+		// If no arguments provided, show the list of contexts
+		if len(args) == 0 {
+			if err := listContexts(); err != nil {
+				fmt.Printf("Error loading config: %v\n", err)
 				os.Exit(1)
 			}
-			fmt.Printf("Error loading config: %v\n", err)
-			os.Exit(1)
-		}
-
-		// Determine the context to switch to (either provided or current)
-		contextName := cfg.CurrentContext
-		if len(args) > 0 {
-			contextName = args[0]
-		}
-
-		// Find the context in the config
-		var contextToSwitch *config.Context
-		for _, ctx := range cfg.Contexts {
-			if ctx.Name == contextName {
-				contextToSwitch = &ctx
-				break
-			}
-		}
-
-		if contextToSwitch == nil {
-			fmt.Printf("Context '%s' not found\n", contextName)
-			os.Exit(1)
-		}
-
-		// Switch context by creating symlinks
-		err = context.SwitchContext(contextToSwitch)
-		if err != nil {
-			fmt.Printf("Error switching context: %v\n", err)
-			os.Exit(1)
 		}
 	},
 }
 
 func Execute() {
+	// Check for any args before executing cobra
+	if len(os.Args) > 1 {
+		// Skip if the first argument is a known command
+		firstArg := os.Args[1]
+		if firstArg != "init" && firstArg != "list" && firstArg != "switch" {
+			// Insert "switch" as the first argument
+			newArgs := make([]string, len(os.Args)+1)
+			newArgs[0] = os.Args[0]
+			newArgs[1] = "switch"
+			copy(newArgs[2:], os.Args[1:])
+			os.Args = newArgs
+		}
+	}
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
