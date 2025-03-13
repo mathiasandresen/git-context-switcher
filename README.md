@@ -14,7 +14,7 @@ A command-line tool that makes it easy to switch between different Git contexts,
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/gitc.git
+git clone https://github.com/mathiasandresen/git-context-switcher.git
 cd gitc
 ```
 
