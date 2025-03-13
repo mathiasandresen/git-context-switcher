@@ -1,4 +1,4 @@
-# Git Context Switcher
+# gitc (Git Context Switcher)
 
 A command-line tool that makes it easy to switch between different Git contexts, managing SSH keys and Git configurations automatically. Perfect for developers who need to maintain separate Git identities for different projects (e.g., work and personal).
 
@@ -14,8 +14,8 @@ A command-line tool that makes it easy to switch between different Git contexts,
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/git-context-switcher.git
-cd git-context-switcher
+git clone https://github.com/your-username/gitc.git
+cd gitc
 ```
 
 2. Build the project:
@@ -25,7 +25,7 @@ go build
 
 3. Optionally, move the binary to your PATH to use it from anywhere:
 ```bash
-sudo mv git-context-switcher /usr/local/bin/
+sudo mv gitc /usr/local/bin/
 ```
 
 ## Configuration
@@ -53,10 +53,16 @@ contexts:
 
 ```bash
 # Switch to a specific context
-git-context-switcher <context-name>
+gitc <context-name>
 
 # Without arguments, switches to the current_context from config
-git-context-switcher
+gitc
+
+# List available contexts
+gitc list
+
+# Initialize configuration
+gitc init
 ```
 
 When you switch contexts, the tool will:

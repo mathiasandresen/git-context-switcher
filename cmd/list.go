@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"git-context-switcher/config"
+	"gitc/config"
 
 	"github.com/spf13/cobra"
 )
@@ -19,7 +19,7 @@ var listCmd = &cobra.Command{
 		}
 
 		if len(cfg.Contexts) == 0 {
-			fmt.Println("No contexts found. Use 'git-context-switcher init' to create one.")
+			fmt.Println("No contexts found. Use 'gitc init' to create one.")
 			return
 		}
 

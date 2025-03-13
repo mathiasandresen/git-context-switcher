@@ -18,17 +18,17 @@ jobs:
 
       - name: Build
         run: |
-          GOOS=linux GOARCH=amd64 go build -o git-context-switcher-linux-amd64
-          GOOS=darwin GOARCH=amd64 go build -o git-context-switcher-darwin-amd64
-          GOOS=darwin GOARCH=arm64 go build -o git-context-switcher-darwin-arm64
-          GOOS=windows GOARCH=amd64 go build -o git-context-switcher-windows-amd64.exe
+          GOOS=linux GOARCH=amd64 go build -o gitc-linux-amd64
+          GOOS=darwin GOARCH=amd64 go build -o gitc-darwin-amd64
+          GOOS=darwin GOARCH=arm64 go build -o gitc-darwin-arm64
+          GOOS=windows GOARCH=amd64 go build -o gitc-windows-amd64.exe
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            git-context-switcher-linux-amd64
-            git-context-switcher-darwin-amd64
-            git-context-switcher-darwin-arm64
-            git-context-switcher-windows-amd64.exe
+            gitc-linux-amd64
+            gitc-darwin-amd64
+            gitc-darwin-arm64
+            gitc-windows-amd64.exe
           generate_release_notes: true

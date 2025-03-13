@@ -2,22 +2,22 @@ package cmd
 
 import (
 	"fmt"
-	"git-context-switcher/config"
-	"git-context-switcher/context"
+	"gitc/config"
+	"gitc/context"
 	"os"
 
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "git-context-switcher",
+	Use:   "gitc",
 	Short: "A tool to switch between Git contexts",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Load the configuration
 		cfg, err := config.LoadConfig()
 		if err != nil {
 			if os.IsNotExist(err) {
-				fmt.Println("No configuration file found. Run 'git-context-switcher init' to create one.")
+				fmt.Println("No configuration file found. Run 'gitc init' to create one.")
 				os.Exit(1)
 			}
 			fmt.Printf("Error loading config: %v\n", err)

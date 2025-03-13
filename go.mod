@@ -1,4 +1,4 @@
-module git-context-switcher
+module gitc
 
 go 1.21.3
 

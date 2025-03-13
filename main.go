@@ -1,7 +1,7 @@
 package main
 
 import (
-	"git-context-switcher/cmd"
+	"gitc/cmd"
 )
 
 func main() {

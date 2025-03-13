@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"git-context-switcher/config"
+	"gitc/config"
 	"os"
 	"path/filepath"
 
@@ -12,8 +12,8 @@ import (
 
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialize git-context-switcher",
-	Long: `Initialize git-context-switcher by creating a config file with a default context.
+	Short: "Initialize gitc",
+	Long: `Initialize gitc by creating a config file with a default context.
 The config file will be created at ~/.git-contexts.yaml if it doesn't exist.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		configFile := filepath.Join(os.Getenv("HOME"), ".git-contexts.yaml")
@@ -51,7 +51,7 @@ The config file will be created at ~/.git-contexts.yaml if it doesn't exist.`,
 			os.Exit(1)
 		}
 
-		fmt.Println("Initialized git-context-switcher")
+		fmt.Println("Initialized gitc")
 		fmt.Println("Config file created at:", configFile)
 		fmt.Println("\nNext steps:")
 		fmt.Println("1. Set your email in the config file")

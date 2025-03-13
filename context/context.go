@@ -2,8 +2,8 @@ package context
 
 import (
 	"fmt"
-	"git-context-switcher/config"
-	"git-context-switcher/utils"
+	"gitc/config"
+	"gitc/utils"
 	"os"
 	"path/filepath"
 )
